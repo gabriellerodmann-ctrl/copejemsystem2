@@ -1,26 +1,9 @@
+```typescript
 import type { Project } from '../types';
 
 const STORAGE_KEY = 'copejem_projects';
 
 // Mock initial data
-const INITIAL_DATA: Project[] = [
-    {
-        id: '1',
-        year: 2024,
-        name: 'Copejem Day',
-        coordinatorId: '101',
-        coordinatorName: 'João Silva',
-        eventDate: '2024-05-15',
-        planningStartDate: '2024-02-01',
-        planningEndDate: '2024-05-01',
-        teamMembers: ['Ana', 'Carlos', 'Beatriz'],
-        description: 'Um dia de imersão e networking para jovens empresários.',
-        status: 'COMPLETED',
-        type: 'EVENT',
-        targetAudience: ['YOUNG_ENTREPRENEURS', 'COPEJEM_MEMBERS'],
-        partners: [
-            { name: 'ACIM', type: 'ACIM' },
-            { name: 'Sicredi', type: 'SPONSOR' }
         ],
         results: {
             participantsCount: 150,

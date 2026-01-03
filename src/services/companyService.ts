@@ -5,15 +5,9 @@ const STORAGE_KEY = 'copejem_companies';
 const INITIAL_DATA: Company[] = [
     {
         id: '1',
-        name: 'Tech Solutions',
-        cnpj: '12.345.678/0001-90',
+        name: 'MakeWork',
+        cnpj: '',
         industry: 'Tecnologia',
-        createdAt: new Date().toISOString()
-    },
-    {
-        id: '2',
-        name: 'Marketing Pro',
-        industry: 'Marketing',
         createdAt: new Date().toISOString()
     }
 ];

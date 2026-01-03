@@ -3,44 +3,12 @@ import type { Member } from '../types';
 const STORAGE_KEY = 'copejem_members';
 
 const INITIAL_DATA: Member[] = [
-    {
-        id: '101',
-        name: 'João Silva',
-        companyName: 'Tech Solutions',
-        companyId: '1',
-        role: 'Presidente',
-        email: 'joao@techsolutions.com.br',
-        cpf: '123.456.789-00',
-        password: '123',
-        status: 'active',
-        admissionYear: 2022,
-        avatarUrl: 'https://ui-avatars.com/api/?name=Joao+Silva&background=0D8ABC&color=fff'
-    },
-    {
-        id: '102',
-        name: 'Maria Souza',
-        companyName: 'Marketing Pro',
-        companyId: '2',
-        role: 'Conselheira',
-        email: 'maria@marketingpro.com.br',
-        cpf: '000.000.000-00',
-        password: '123',
-        status: 'active',
-        admissionYear: 2023,
-        avatarUrl: 'https://ui-avatars.com/api/?name=Maria+Souza&background=random'
-    },
-    {
-        id: 'admin-gabrielle',
-        name: 'Gabrielle Rodmann Elias',
-        companyName: 'MakeWork',
-        companyId: '3',
-        role: 'Presidente',
-        email: 'email@makework.tech',
-        password: 'Teste@123',
-        cpf: '000.000.000-00',
-        status: 'active',
-        admissionYear: 2024,
-        avatarUrl: 'https://ui-avatars.com/api/?name=Gabrielle+Elias&background=purple&color=fff'
+    email: 'email@makework.tech',
+    password: 'Teste@123',
+    cpf: '000.000.000-00',
+    status: 'active',
+    admissionYear: 2024,
+    avatarUrl: 'https://ui-avatars.com/api/?name=Gabrielle+Elias&background=purple&color=fff'
     }
 ];
 
