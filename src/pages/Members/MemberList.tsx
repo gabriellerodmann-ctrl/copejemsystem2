@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { MemberService } from '../../services/memberService';
 import { CompanyService } from '../../services/companyService';
-import { Member, Company } from '../../types';
-import { Plus, User, Building, Mail, Search, Filter } from 'lucide-react';
+import type { Member, Company } from '../../types';
+import { Plus, Search, Filter, Building, User, Mail } from 'lucide-react';
 
-export default function MemberList({ onNavigate }: { onNavigate: (path: string) => void }) {
+export default function MemberList({ onNavigate }: { onNavigate: (path: string, id?: string) => void }) {
     const [members, setMembers] = useState<Member[]>([]);
     const [companies, setCompanies] = useState<Company[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -100,10 +100,10 @@ export default function MemberList({ onNavigate }: { onNavigate: (path: string) 
                             <div className="flex-1 min-w-0">
                                 <div className="flex justify-between items-start">
                                     <h3 className="text-lg font-bold text-gray-900 truncate pr-2">{member.name}</h3>
-                                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${member.status === 'active'
+                                    <span className={`px - 2 py - 0.5 rounded - full text - xs font - medium ${member.status === 'active'
                                         ? 'bg-green-100 text-green-700'
                                         : 'bg-red-100 text-red-700'
-                                        }`}>
+                                        } `}>
                                         {member.status === 'active' ? 'Ativo' : 'Inativo'}
                                     </span>
                                 </div>

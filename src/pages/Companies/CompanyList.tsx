@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CompanyService } from '../../services/companyService';
-import { Company } from '../../types';
+import type { Company } from '../../types';
 import { Plus, Building, Search, Filter } from 'lucide-react';
 
 export default function CompanyList({ onNavigate }: { onNavigate: (path: string, id?: string) => void }) {

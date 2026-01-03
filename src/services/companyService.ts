@@ -1,4 +1,4 @@
-import { Company } from '../types';
+import type { Company } from '../types';
 
 const STORAGE_KEY = 'copejem_companies';
 

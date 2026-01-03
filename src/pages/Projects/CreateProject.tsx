@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ProjectService } from '../../services/projectService';
 import { MemberService } from '../../services/memberService';
-import { ProjectStatus, ProjectType, Member, ProjectTask, ProjectSponsor } from '../../types';
-import { Badge } from '../../components/ui/Badge';
+import type { ProjectStatus, ProjectType, Member, ProjectTask, ProjectSponsor } from '../../types';
 import { ArrowLeft, Save, Trash2, Plus } from 'lucide-react';
 
 interface CreateProjectProps {
@@ -75,7 +74,6 @@ export default function CreateProject({ onNavigate, projectId }: CreateProjectPr
             ...formData,
             teamMembers: formData.teamMembers, // Already array
             images: formData.images.split(',').map(s => s.trim()).filter(Boolean),
-            files: formData.files.split(',').map(s => s.trim()).filter(Boolean).map(url => ({ name: 'File', url })),
             files: formData.files.split(',').map(s => s.trim()).filter(Boolean).map(url => ({ name: 'File', url })),
             eventDate: formData.eventDate,
             schedule: formData.schedule,

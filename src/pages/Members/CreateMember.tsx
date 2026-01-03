@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { MemberService } from '../../services/memberService';
 import { CompanyService } from '../../services/companyService';
-import { Company, Member } from '../../types';
+import type { Company, Member } from '../../types';
 import { ArrowLeft, Save, Building as BuildingIcon, Shield } from 'lucide-react';
 
 interface CreateMemberProps {

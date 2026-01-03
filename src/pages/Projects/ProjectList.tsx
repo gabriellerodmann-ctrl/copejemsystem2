@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ProjectService } from '../../services/projectService';
-import { Project, ProjectStatus, ProjectType } from '../../types';
+import type { Project, ProjectStatus, ProjectType } from '../../types';
 import { Badge } from '../../components/ui/Badge';
 import { Plus, Calendar, Users, Target, ArrowRight, Search } from 'lucide-react';
 

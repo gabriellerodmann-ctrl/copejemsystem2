@@ -10,9 +10,9 @@ interface CreateCompanyProps {
 export default function CreateCompany({ onNavigate, companyId }: CreateCompanyProps) {
     const [formData, setFormData] = useState({
         name: '',
-        cnpj: '',
+        cnpj: '' as string,
         industry: '',
-        website: ''
+        website: '' as string
     });
 
     useEffect(() => {
@@ -21,9 +21,9 @@ export default function CreateCompany({ onNavigate, companyId }: CreateCompanyPr
             if (company) {
                 setFormData({
                     name: company.name,
-                    cnpj: company.cnpj || '',
-                    industry: company.industry,
-                    website: company.website || ''
+                    cnpj: company.cnpj ?? '',
+                    industry: company.industry ?? '',
+                    website: company.website ?? ''
                 });
             }
         }

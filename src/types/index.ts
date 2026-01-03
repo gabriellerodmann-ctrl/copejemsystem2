@@ -22,8 +22,8 @@ export interface ProjectPartner {
 export interface ProjectResults {
   participantsCount?: number;
   estimatedReach?: number;
+  impactReached?: number;
   satisfactionScore?: number; // 1-10 or 1-5
-  satisfactionFeedback?: string;
   satisfactionFeedback?: string;
 }
 
@@ -118,7 +118,6 @@ export interface Member {
   avatarUrl?: string;
   cpf?: string;
   password?: string;
-  phone?: string;
   isAdmin?: boolean;
   exitYear?: number;
 }
