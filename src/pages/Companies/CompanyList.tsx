@@ -9,7 +9,11 @@ export default function CompanyList({ onNavigate }: { onNavigate: (path: string,
     const [selectedIndustry, setSelectedIndustry] = useState<string>('all');
 
     useEffect(() => {
-        setCompanies(CompanyService.getAll());
+        const fetchCompanies = async () => {
+            const data = await CompanyService.getAll();
+            setCompanies(data);
+        };
+        fetchCompanies();
     }, []);
 
     const filteredCompanies = companies.filter(company => {

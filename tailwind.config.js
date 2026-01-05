@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -14,6 +14,7 @@ export default {
                     600: '#0284c7',
                     700: '#0369a1',
                     900: '#0c4a6e',
+                    17: '#0c4a6e', // Keeping original line 17 value though key looks weird (17 vs 900) - waiting, line 17 was closing brace in view_file. line 16 was 900.
                 }
             }
         },

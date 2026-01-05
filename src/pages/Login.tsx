@@ -11,15 +11,17 @@ export default function Login({ onLogin }: LoginProps) {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
-        const member = MemberService.login(identifier, password);
+        const member = await MemberService.authenticate(identifier, password);
 
         if (member) {
             // In a real app we would set a token here
             localStorage.setItem('isAuthenticated', 'true');
+            // Store user for role checks
+            localStorage.setItem('currentUser', JSON.stringify(member));
             onLogin();
         } else {
             setError('Credenciais inválidas. Tente novamente.');

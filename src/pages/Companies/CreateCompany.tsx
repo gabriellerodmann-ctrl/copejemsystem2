@@ -16,26 +16,29 @@ export default function CreateCompany({ onNavigate, companyId }: CreateCompanyPr
     });
 
     useEffect(() => {
-        if (companyId) {
-            const company = CompanyService.getById(companyId);
-            if (company) {
-                setFormData({
-                    name: company.name,
-                    cnpj: company.cnpj ?? '',
-                    industry: company.industry ?? '',
-                    website: company.website ?? ''
-                });
+        const fetchCompany = async () => {
+            if (companyId) {
+                const company = await CompanyService.getById(companyId);
+                if (company) {
+                    setFormData({
+                        name: company.name,
+                        cnpj: company.cnpj ?? '',
+                        industry: company.industry ?? '',
+                        website: company.website ?? ''
+                    });
+                }
             }
-        }
+        };
+        fetchCompany();
     }, [companyId]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             if (companyId) {
-                CompanyService.update(companyId, formData);
+                await CompanyService.update(companyId, formData);
             } else {
-                CompanyService.create(formData);
+                await CompanyService.create(formData);
             }
             onNavigate('companies');
         } catch (error) {

@@ -12,8 +12,15 @@ export default function MemberList({ onNavigate }: { onNavigate: (path: string, 
     const [selectedStatus, setSelectedStatus] = useState<string>('all');
 
     useEffect(() => {
-        setMembers(MemberService.getAll());
-        setCompanies(CompanyService.getAll());
+        const loadData = async () => {
+            const [membersData, companiesData] = await Promise.all([
+                MemberService.getAll(),
+                CompanyService.getAll()
+            ]);
+            setMembers(membersData);
+            setCompanies(companiesData);
+        };
+        loadData();
     }, []);
 
     const filteredMembers = members.filter(member => {

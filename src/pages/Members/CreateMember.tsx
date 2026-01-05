@@ -33,40 +33,44 @@ export default function CreateMember({ onNavigate, memberId }: CreateMemberProps
     });
 
     useEffect(() => {
-        setCompanies(CompanyService.getAll());
+        const loadData = async () => {
+            const companiesData = await CompanyService.getAll();
+            setCompanies(companiesData);
 
-        // Get current user for permissions
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-            setCurrentUser(JSON.parse(storedUser));
-        }
-
-        if (memberId) {
-            const member = MemberService.getById(memberId);
-            if (member) {
-                setFormData({
-                    name: member.name,
-                    email: member.email,
-                    phone: member.phone || '',
-                    cpf: member.cpf || '',
-                    password: '', // Don't load password security wise, or load but keep hidden
-                    role: member.role,
-                    admissionYear: member.admissionYear,
-                    exitYear: member.exitYear || '',
-                    companyId: member.companyId || '',
-                    status: member.status,
-                    isAdmin: member.isAdmin || false,
-                    newCompanyName: '',
-                    newCompanyIndustry: ''
-                });
+            // Get current user for permissions
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                setCurrentUser(JSON.parse(storedUser));
             }
-        } else {
-            // New user: show password input by default
-            setShowPasswordInput(true);
-        }
+
+            if (memberId) {
+                const member = await MemberService.getById(memberId);
+                if (member) {
+                    setFormData({
+                        name: member.name,
+                        email: member.email,
+                        phone: member.phone || '',
+                        cpf: member.cpf || '',
+                        password: '', // Don't load password security wise, or load but keep hidden
+                        role: member.role,
+                        admissionYear: member.admissionYear,
+                        exitYear: member.exitYear || '',
+                        companyId: member.companyId || '',
+                        status: member.status,
+                        isAdmin: member.isAdmin || false,
+                        newCompanyName: '',
+                        newCompanyIndustry: ''
+                    });
+                }
+            } else {
+                // New user: show password input by default
+                setShowPasswordInput(true);
+            }
+        };
+        loadData();
     }, [memberId]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
@@ -79,7 +83,7 @@ export default function CreateMember({ onNavigate, memberId }: CreateMemberProps
                     alert('Nome da empresa é obrigatório');
                     return;
                 }
-                const newCompany = CompanyService.create({
+                const newCompany = await CompanyService.create({
                     name: formData.newCompanyName,
                     industry: formData.newCompanyIndustry
                 });
@@ -116,9 +120,9 @@ export default function CreateMember({ onNavigate, memberId }: CreateMemberProps
             }
 
             if (memberId) {
-                MemberService.update(memberId, memberData);
+                await MemberService.update(memberId, memberData);
             } else {
-                MemberService.create(memberData);
+                await MemberService.create(memberData);
             }
 
             onNavigate('members');

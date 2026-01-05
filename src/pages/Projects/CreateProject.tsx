@@ -33,36 +33,43 @@ export default function CreateProject({ onNavigate, projectId }: CreateProjectPr
     });
 
     useEffect(() => {
-        setAvailableMembers(MemberService.getAll());
+        const fetchMembers = async () => {
+            const members = await MemberService.getAll();
+            setAvailableMembers(members);
+        };
+        fetchMembers();
     }, []);
 
     useEffect(() => {
-        if (projectId) {
-            const project = ProjectService.getById(projectId);
-            if (project) {
-                setFormData({
-                    name: project.name,
-                    year: project.year,
-                    description: project.description,
-                    status: project.status,
-                    type: project.type,
-                    eventDate: project.eventDate,
-                    coordinatorId: project.coordinatorId,
-                    coordinatorName: project.coordinatorName,
-                    teamMembers: project.teamMembers, // Already an array of strings (names)
-                    budgetPlanned: project.budgetPlanned || 0,
-                    budgetReached: project.budgetReached || 0,
-                    lessonsLearned: project.lessonsLearned || '',
-                    images: (project.images || []).join(', '),
-                    files: (project.files || []).map(f => f.url).join(', '),
-                    schedule: project.schedule || [],
-                    sponsors: project.sponsors || [],
-                });
+        const fetchProject = async () => {
+            if (projectId) {
+                const project = await ProjectService.getById(projectId);
+                if (project) {
+                    setFormData({
+                        name: project.name,
+                        year: project.year,
+                        description: project.description,
+                        status: project.status,
+                        type: project.type,
+                        eventDate: project.eventDate,
+                        coordinatorId: project.coordinatorId,
+                        coordinatorName: project.coordinatorName,
+                        teamMembers: project.teamMembers, // Already an array of strings (names)
+                        budgetPlanned: project.budgetPlanned || 0,
+                        budgetReached: project.budgetReached || 0,
+                        lessonsLearned: project.lessonsLearned || '',
+                        images: (project.images || []).join(', '),
+                        files: (project.files || []).map(f => f.url).join(', '),
+                        schedule: project.schedule || [],
+                        sponsors: project.sponsors || [],
+                    });
+                }
             }
-        }
+        };
+        fetchProject();
     }, [projectId]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!formData.name || !formData.coordinatorName) {
@@ -82,9 +89,9 @@ export default function CreateProject({ onNavigate, projectId }: CreateProjectPr
 
         try {
             if (projectId) {
-                ProjectService.update(projectId, projectData);
+                await ProjectService.update(projectId, projectData);
             } else {
-                ProjectService.create({
+                await ProjectService.create({
                     ...projectData,
                     coordinatorId: formData.coordinatorId || 'mock-id',
                     planningStartDate: new Date().toISOString(),

@@ -25,7 +25,11 @@ export default function ProjectList({ onNavigate }: { onNavigate: (path: string,
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        setProjects(ProjectService.getAll());
+        const fetchProjects = async () => {
+            const data = await ProjectService.getAll();
+            setProjects(data);
+        };
+        fetchProjects();
     }, []);
 
     const filteredProjects = projects.filter(project => {
